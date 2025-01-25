@@ -3,7 +3,7 @@ from api.models import *
 
 router = APIRouter()
 
-recipe :Recipe
+recipe: Recipe = Recipe(name="", ingredient=[], links=[])
 hour: int = 0
 dishTime: str = ""
 inputMessage: str = 0

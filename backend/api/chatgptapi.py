@@ -6,64 +6,53 @@ from youtubeapi import video_list
 load_dotenv()
 __TOKEN = os.getenv("OPENAI_API_KEY")
 
+def __sigin(token: str):
+  return OpenAI(
+  api_key=__TOKEN
+  )
 
 a = "give me a dish ralates to"
 b = "potato"
-#c = "only the name is needed, and the material needed, name and material should be divided by ';', each material should be divided by space"
-#d = "another should give out the weight of each material correspondingly(unit is gram, do not show the unit), then the carbon emission(unit is kg, do not show the unit), the two things divided by ';', each weight and carbon emission is divided by space"
-#f = "always follow the template:'Dish Name: a_name;\n Materials: materials1 materials2 material3 ... materialn;\n Weights: weight1 weight2 weight3 ...;\n Carbon Emissions: 0.422 0.464 0.032 0.008 0.100 0.112 0.001'\n"
-
 c = "in the following json format ```json\n\"Dish_Name\": \"dishname\",\"Materials\": ['material1',...],\"Weights\":[weight1,...], \"Carbon_Emission\":[carbon emission1,...]```"
 
-client = OpenAI(
-  api_key=__TOKEN
-)
+def analyze_data(time: str, input: str, choice: str, client: OpenAI):
+  completion = client.chat.completions.create(
+    model="gpt-4o-mini-2024-07-18",
+    store=True,
+    messages=[
+      {"role": "user", "content": a + input + c + time + choice}
+    ]
+  )
 
+  content = completion.choices[0].message.content.split("{")[1];
+  content = content.split("}")[0]
+  each_line = content.split("\n")
+  return each_line
 
-completion = client.chat.completions.create(
-  model="gpt-4o-mini-2024-07-18",
-  store=True,
-  messages=[
-    {"role": "user", "content": a+b+c}
-  ]
-)
+def get_dish_name(each_line: list[str]):
+  nam_dish = each_line[1].split(":")[1].replace('"',"").replace(',','')
+  return nam_dish
 
-content = completion.choices[0].message.content.split("{")[1];
-content = content.split("}")[0]
+def get_material_name_list(each_line: list[str]):
+  nam_material = each_line[2].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
+  return nam_material
 
-each_Line = content.split("\n")
-nam_Dish = each_Line[1].split(":")[1].replace('"',"").replace(',','')
-Recipe = nam_Dish
-print(nam_Dish)
+def get_material_weight_list(each_line: list[str]):
+  wei_material = each_line[3].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
+  return wei_material
 
-nam_Material = each_Line[2].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
+def get_material_carbon_list(each_line: list[str]):
+  car_material = each_line[4].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
+  return car_material
 
-wei_Material = each_Line[3].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
+def get_ingredient_list(name_list: list[str], weight_list: list[str], carbon_list: list[str]):
+  length = len(name_list)
+  ingred = Ingredient(name = '', price = 0, weight = 0, carbon = 0)
+  ingred_list = []
 
-car_Material = each_Line[4].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
-
-len_inte = len(nam_Material)    
-ingre = Ingredient(name='',price=0,weight=0,carbon=0)
-list_ingre = []
-for i in range(len_inte-1):
-    list_ingre.append(ingre)
-    list_ingre[i].name = nam_Material[i]
-    list_ingre[i].weight = wei_Material[i]
-    list_ingre[i].carbon = car_Material[i]
-
-print(list_ingre[0].name)
-
-reCip = Recipe(name='reCip', Ingredient=list_ingre,links=video_list)
-
-#for item in nam_Material:
-#    print(item)
-# nam_Mat_Wei_Car = completion.choices[0].message.content.split(";");
-# 
-# dish_Name = nam_Mat_Wei_Car[0].split(":")[1].replace(";","")
-# print(nam_Mat_Wei_Car[0])
-# print(dish_Name)
-# 
-# material_name = nam_Mat_Wei_Car[1].split(" ")
-# print(material_name[1])
-
-#print(completion.choices[0].message.content);
+  for i in range(length - 1) :
+      ingred_list.append(ingred)
+      ingred_list[i].name = name_list[i]
+      ingred_list[i].weight = weight_list[i]
+      ingred_list[i].carbon = carbon_list[i]
+      return ingred_list
