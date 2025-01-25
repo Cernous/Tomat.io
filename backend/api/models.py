@@ -9,9 +9,9 @@ from sqlmodel import Field, Relationship, SQLModel
 
 class Ingredient(SQLModel):
     name: str
-    price: float
-    weight: float
-    carbon: float
+    price: str
+    weight: str
+    carbon: str
 
 
 class Recipe(SQLModel):
