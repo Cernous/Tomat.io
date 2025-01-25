@@ -1,7 +1,8 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
-from models import UserRequest, Recipe, Ingredient
+from backend.api.models import UserRequest, Recipe, Ingredient
+from youtubeapi import video_list
 load_dotenv()
 __TOKEN = os.getenv("OPENAI_API_KEY")
 
@@ -13,7 +14,6 @@ def __sigin(token: str):
 a = "give me a dish ralates to"
 b = "potato"
 c = "in the following json format ```json\n\"Dish_Name\": \"dishname\",\"Materials\": ['material1',...],\"Weights\":[weight1,...], \"Carbon_Emission\":[carbon emission1,...]```"
-
 
 def analyze_data(time: str, input: str, choice: str, client: OpenAI):
   completion = client.chat.completions.create(
