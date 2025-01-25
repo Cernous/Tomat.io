@@ -11,16 +11,12 @@ def __sigin(token: str):
   api_key=__TOKEN
   )
 
-a = "give me a dish ralates to"
-b = "potato"
-c = "in the following json format ```json\n\"Dish_Name\": \"dishname\",\"Materials\": ['material1',...],\"Weights\":[weight1,...], \"Carbon_Emission\":[carbon emission1,...]```"
-
 def analyze_data(time: str, input: str, choice: str, client: OpenAI):
   completion = client.chat.completions.create(
     model="gpt-4o-mini-2024-07-18",
     store=True,
     messages=[
-      {"role": "user", "content": a + input + c + time + choice}
+      {"role": "user", "content": "give me a dish relates to" + input + "in the following json format ```json\n\"Dish_Name\": \"dishname\",\"Materials\": ['material1',...],\"Weights\":[weight1,...], \"Carbon_Emission\":[carbon emission1,...]```" + time + choice}
     ]
   )
 
@@ -55,4 +51,4 @@ def get_ingredient_list(name_list: list[str], weight_list: list[str], carbon_lis
       ingred_list[i].name = name_list[i]
       ingred_list[i].weight = weight_list[i]
       ingred_list[i].carbon = carbon_list[i]
-      return ingred_list
+  return ingred_list
