@@ -1,5 +1,8 @@
 from openai import OpenAI
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
+__TOKEN = os.getenv("OPENAI_API_KEY")
 
 a = "give me a dish ralates to"
 b = "potato"
@@ -10,7 +13,7 @@ b = "potato"
 c = "in the following json format ```json\n\"Dish_Name\": \"dishname\",\"Materials\": ['material1',...],\"Weights\":[weight1,...], \"Carbon_Emission\":[carbon emission]```"
 
 client = OpenAI(
-  
+  api_key=__TOKEN
 )
 
 
