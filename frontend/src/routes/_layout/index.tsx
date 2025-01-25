@@ -1,6 +1,7 @@
-import { Box, Input, Link } from '@chakra-ui/react'
+import { Box, Input, Link, Center, Flex, InputGroup, InputRightElement, Button} from '@chakra-ui/react'
 import { createFileRoute } from '@tanstack/react-router'
 import React from 'react'
+
 
 export const Route = createFileRoute('/_layout/')({
   component: Index,
@@ -9,32 +10,58 @@ export const Route = createFileRoute('/_layout/')({
 function Index() {
   return (
     <div>
-      <Box
+      <Flex
         display="flex"
+        flexDir="column"
         justifyContent="space-between"
-        alignItems="center"
         p={4}
         bg="teal.500"
-      >
-        <Link
-          href="https://en.wikipedia.org/wiki/Tomato"
-          color="white"
-          fontSize="2xl"
-          fontWeight="bold"
-        >
-          Tomat.io
-        </Link>
-      </Box>
+      > 
+      <Box>
+      <Center>
+          <Link
+            href="https://en.wikipedia.org/wiki/Tomato"
+            color="white"
+            fontSize="2xl"
+            fontWeight="bold"
+          > 
+            Tomat.io
+          </Link>
+        </Center></Box>
+      </Flex>
 
-      <Box p={4}>
+
+      <Box 
+      p={4}
+      alignSelf = "center">
+        <Flex>
         <Input
           type="text"
           name="query"
+          display="flex"
+          flexDir="column"
           placeholder="Enter Questions Here!"
           size="lg"
           variant="outline"
+
+
         />
+      </Flex>
       </Box>
+      <Box position="fixed" bottom="0" width="100%" bg="white" p={4} boxShadow="lg">
+      <InputGroup size="md">
+        <Input
+          placeholder="Enter Your Questions Here"
+          borderColor="gray.300"
+          focusBorderColor=".500"
+        />
+        <InputRightElement>
+          <Button colorScheme="teal" size="sm" width = "50%">
+            Search
+          </Button>
+        </InputRightElement>
+      </InputGroup>
+    </Box>
     </div>
   )
 }
