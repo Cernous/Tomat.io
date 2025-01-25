@@ -11,7 +11,7 @@ userChoice: list[str] = []
 
 @router.get("/api/dish/query")
 def get_dish(request: UserRequest):
-    hour = int(request.time[0-1])
+    hour = int(request.time[0:1])
     if 8 <= hour <= 10:
         dishTime = "breakfest"
     elif 11 <= hour <= 3:
