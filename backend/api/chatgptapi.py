@@ -1,7 +1,7 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
-from backend.api.models import UserRequest, Recipe, Ingredient
+from models import UserRequest, Recipe, Ingredient
 load_dotenv()
 __TOKEN = os.getenv("OPENAI_API_KEY")
 
@@ -41,21 +41,19 @@ wei_Material = each_Line[3].split(":")[1].replace('[','').replace(']','').replac
 
 car_Material = each_Line[4].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
 
-len_inte = len(nam_Material)
+len_inte = len(nam_Material)    
+ingre = Ingredient(name='',price=0,weight=0,carbon=0)
+list_ingre = []
+for i in range(len_inte-1):
+    list_ingre.append(ingre)
+    list_ingre[i].name = nam_Material[i]
+    list_ingre[i].weight = wei_Material[i]
+    list_ingre[i].carbon = car_Material[i]
 
-for i in len_inte:
-    
-    
-a: list[Ingredient] = [len_init]
-for i in len_inte:
-    ingred: Ingredient
-    ingred.name = nam_Material[i]
-    ingred.weight = wei_Material[i]
-    ingred.carbon = car_Material[i]
-    a.append(ingred)    
+print(list_ingre[0].name)
 
-for item in car_Material:
-    print(item)
+#for item in nam_Material:
+#    print(item)
 # nam_Mat_Wei_Car = completion.choices[0].message.content.split(";");
 # 
 # dish_Name = nam_Mat_Wei_Car[0].split(":")[1].replace(";","")
