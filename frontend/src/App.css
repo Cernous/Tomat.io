@@ -1,10 +1,16 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.header{
+  opacity: 75%;
+  position: top;
 }
 
+.footer{
+  opacity: 75%;
+  position: bottom;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -14,9 +20,7 @@
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+
 
 @keyframes logo-spin {
   from {
@@ -33,10 +37,5 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
 
-.read-the-docs {
-  color: #888;
-}
+
