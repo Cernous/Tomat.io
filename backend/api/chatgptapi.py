@@ -1,8 +1,10 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
+#from models import UserRequest, Recipe
 load_dotenv()
 __TOKEN = os.getenv("OPENAI_API_KEY")
+
 
 a = "give me a dish ralates to"
 b = "potato"
@@ -30,9 +32,10 @@ content = content.split("}")[0];
 #print(content)
 each_Line = content.split("\n")
 nam_Dish = each_Line[1].split(":")[1].replace('"',"").replace(',','')
+Recipe = nam_Dish
 print(nam_Dish)
 
-nam_Material = each_Line[2].split(":")[1].replace('[','').replace(']','').split(",")
+nam_Material = each_Line[2].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
 
 
 for item in nam_Material:
