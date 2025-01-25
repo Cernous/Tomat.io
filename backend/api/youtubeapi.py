@@ -1,5 +1,5 @@
 from googleapiclient.discovery import build
-from chatgptapi import nam_Dish
+from backend.api.chatgptapi import nam_Dish
 import os
 from dotenv import load_dotenv
 load_dotenv()

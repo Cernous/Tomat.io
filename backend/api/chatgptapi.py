@@ -1,7 +1,7 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
-#from models import UserRequest, Recipe
+from backend.api.models import UserRequest, Recipe, Ingredient
 load_dotenv()
 __TOKEN = os.getenv("OPENAI_API_KEY")
 
@@ -12,7 +12,7 @@ b = "potato"
 #d = "another should give out the weight of each material correspondingly(unit is gram, do not show the unit), then the carbon emission(unit is kg, do not show the unit), the two things divided by ';', each weight and carbon emission is divided by space"
 #f = "always follow the template:'Dish Name: a_name;\n Materials: materials1 materials2 material3 ... materialn;\n Weights: weight1 weight2 weight3 ...;\n Carbon Emissions: 0.422 0.464 0.032 0.008 0.100 0.112 0.001'\n"
 
-c = "in the following json format ```json\n\"Dish_Name\": \"dishname\",\"Materials\": ['material1',...],\"Weights\":[weight1,...], \"Carbon_Emission\":[carbon emission]```"
+c = "in the following json format ```json\n\"Dish_Name\": \"dishname\",\"Materials\": ['material1',...],\"Weights\":[weight1,...], \"Carbon_Emission\":[carbon emission1,...]```"
 
 client = OpenAI(
   api_key=__TOKEN
@@ -28,8 +28,8 @@ completion = client.chat.completions.create(
 )
 
 content = completion.choices[0].message.content.split("{")[1];
-content = content.split("}")[0];
-#print(content)
+content = content.split("}")[0]
+
 each_Line = content.split("\n")
 nam_Dish = each_Line[1].split(":")[1].replace('"',"").replace(',','')
 Recipe = nam_Dish
@@ -37,8 +37,24 @@ print(nam_Dish)
 
 nam_Material = each_Line[2].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
 
+wei_Material = each_Line[3].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
 
-for item in nam_Material:
+car_Material = each_Line[4].split(":")[1].replace('[','').replace(']','').replace('"','').split(",")
+
+len_inte = len(nam_Material)
+
+for i in len_inte:
+    
+    
+a: list[Ingredient] = [len_init]
+for i in len_inte:
+    ingred: Ingredient
+    ingred.name = nam_Material[i]
+    ingred.weight = wei_Material[i]
+    ingred.carbon = car_Material[i]
+    a.append(ingred)    
+
+for item in car_Material:
     print(item)
 # nam_Mat_Wei_Car = completion.choices[0].message.content.split(";");
 # 
