@@ -1,7 +1,8 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
-from models import UserRequest, Recipe, Ingredient
+from backend.api.models import UserRequest, Recipe, Ingredient
+from youtubeapi import video_list
 load_dotenv()
 __TOKEN = os.getenv("OPENAI_API_KEY")
 
@@ -51,6 +52,8 @@ for i in range(len_inte-1):
     list_ingre[i].carbon = car_Material[i]
 
 print(list_ingre[0].name)
+
+reCip = Recipe(name='reCip', Ingredient=list_ingre,links=video_list)
 
 #for item in nam_Material:
 #    print(item)
