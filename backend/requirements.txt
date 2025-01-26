@@ -5,3 +5,4 @@ python-dotenv
 sqlmodel
 openai
 google-api-python-client
+youtube_transcript_api

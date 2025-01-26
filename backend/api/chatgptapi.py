@@ -16,7 +16,7 @@ def analyze_data(time: str, input: str, choice: str, client: OpenAI):
     model="gpt-4o-mini-2024-07-18",
     store=True,
     messages=[
-      {"role": "user", "content": "give me a dish relates to" + input + "in the following json format ```json\n\"Dish_Name\": \"dishname\",\"Materials\": ['material1',...],\"Weights\":[weight1,...], \"Carbon_Emission\":[carbon emission1,...]```" + time + choice}
+      {"role": "user", "content": "give me a dish relates to" + input + "in the following json format ```json\n\"Dish_Name\": \"dishname\",\"Materials\": ['material1',...],\"Weights\":[weight1,...], \"Carbon_Emission\":[carbon emission1,...]```" + "Weight should be measured in pounds "+ time + choice}
     ]
   )
 
