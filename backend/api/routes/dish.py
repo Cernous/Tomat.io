@@ -36,13 +36,14 @@ def get_dish(request: UserRequest):
     weight_list = get_material_weight_list(content)
     carbon_list = get_material_carbon_list(content)
     ingred = get_ingredient_list(name_list, weight_list, carbon_list)
+    print(ingred)
     priCe: float = 0
     for item in ingred:
         NamE = item.name
         WeighT = item.weight
         priceOfItem = checkPri(NamE, client)
         wei =float(WeighT) 
-        single_Price = (priceOfItem)*wei*50
+        single_Price = (priceOfItem)*wei
         priCe += single_Price
 
     video_links = search_youtube_videos(dish_name, 3)
@@ -50,6 +51,6 @@ def get_dish(request: UserRequest):
     recipe.ingredient = ingred
     recipe.links = [v['link'] for v in video_links]
     recipe.price = str(round(priCe,2))
-
+    print(recipe)
     return(recipe)
 

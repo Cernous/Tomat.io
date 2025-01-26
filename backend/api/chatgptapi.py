@@ -42,13 +42,8 @@ def get_material_carbon_list(each_line: list[str]):
   return car_material
 
 def get_ingredient_list(name_list: list[str], weight_list: list[str], carbon_list: list[str]):
-  length = len(name_list)
-  ingred = Ingredient(name = '', price = "0", weight = "0", carbon = "0")
+  length = min([len(name_list), len(weight_list), len(carbon_list)])
   ingred_list = []
-
-  for i in range(length - 1) :
-      ingred_list.append(ingred)
-      ingred_list[i].name = name_list[i]
-      ingred_list[i].weight = weight_list[i]
-      ingred_list[i].carbon = carbon_list[i]
+  for i in range(length):
+    ingred_list.append(Ingredient(name=name_list[i].strip(), weight=weight_list[i].strip(), carbon=carbon_list[i].strip(), price="0"))
   return ingred_list
