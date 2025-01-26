@@ -1,7 +1,8 @@
-import { Box, Divider, Flex, ColorMode, Center, Link} from '@chakra-ui/react'
+import { Box, Divider, Flex, ColorMode, Center, Link, Image} from '@chakra-ui/react'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import '@fontsource/raleway/400.css'
 import '@fontsource/open-sans/700.css'
+import tomatioLogo from '../assets/tomat-01.svg'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,22 +36,21 @@ function RouteComponent() {
         transform = "translate(50%, -70%)" 
         p={4}
       > 
-      <Box>
+      <Flex transform = "translateY(30%)" height = "20vh">
+        
       <Center>
           <Link
             href="/"
-            color="black"
-            fontSize="2rem"
-            fontWeight="bold"
             _hover={{
               color: "red",
               textDecoration: "none", // Optionally remove underline
             }}
             transition="all 0.3s ease-in-out"
           > 
-            Tomat.io
+            <Image top = "20vh"boxSize = "200px" src = {tomatioLogo} alt = "tomat-logo"></Image>
+            
           </Link>
-        </Center></Box>
+        </Center></Flex>
       </Flex>
     <Outlet />
     </>
