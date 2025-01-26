@@ -18,6 +18,7 @@ class Recipe(SQLModel):
     name: str
     ingredient: list[Ingredient]
     links: list[str]
+    price: str
 
 class UserRequest(SQLModel):
     time: str
