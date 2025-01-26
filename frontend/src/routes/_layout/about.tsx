@@ -9,13 +9,14 @@ export const Route = createFileRoute('/_layout/about')({
 const fadeUp = keyframes`
   0% {
     opacity: 0;
-    transform: translate(-50%, 15vh); /* Start slightly below the initial position */
+    transform: translate(0%, 15vh); /* Start slightly below the initial position */
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, 8vh); /* Final position */
+    transform: translate(0%, 0vh); /* Final position */
   }
 `;
+
 
 
 
@@ -44,8 +45,8 @@ function About() {
     >
     <SimpleGrid 
     spacing={10} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-    <Card>
-      <CardHeader animation={`${fadeUp} 1.5s ease-out`} >
+    <Card animation={`${fadeUp} 1s ease-out`}>
+      <CardHeader >
         <Heading size='md'> Gorden Quach</Heading>
       </CardHeader>
       <CardBody>
@@ -55,8 +56,8 @@ function About() {
         <Button onClick= {github1}>Github</Button>
       </CardFooter>
     </Card>
-    <Card>
-      <CardHeader >
+    <Card animation={`${fadeUp} 1.5s ease-out`}>
+      <CardHeader>
         <Heading size='md'> Clarence Zhen</Heading>
       </CardHeader>
       <CardBody>
@@ -66,7 +67,7 @@ function About() {
         <Button onClick={github2}>Github</Button>
       </CardFooter>
     </Card>
-    <Card>
+    <Card animation={`${fadeUp} 2s ease-out`}>
       <CardHeader>
         <Heading size='md'> Zhibo Wang</Heading>
       </CardHeader>
@@ -77,8 +78,8 @@ function About() {
         <Button onClick= {github3}>Github</Button>
       </CardFooter>
     </Card>
-    <Card>
-      <CardHeader>
+    <Card animation={`${fadeUp} 2.5s ease-out`}>
+      <CardHeader >
         <Heading size='md'> Yuran Wang</Heading>
       </CardHeader>
       <CardBody>
