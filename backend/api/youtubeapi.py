@@ -1,5 +1,5 @@
 from googleapiclient.discovery import build
-import os
+import os,json
 from dotenv import load_dotenv
 from youtube_transcript_api import YouTubeTranscriptApi
 load_dotenv()
@@ -35,8 +35,16 @@ def get_transcript(video_id):
     text: str = ""
     transcript = YouTubeTranscriptApi.get_transcript(video_id)
 
-    for entry in transcript:
-        text.append(entry['text'])
+    text = " ".join([entry["text"] for entry in transcript])
     return text
 
-
+if __name__ == "__main__":
+    videos = search_youtube_videos("How to make tacos")
+    vids = get_video_id(videos)
+    for v, i in zip(vids, range(len(vids))):
+        try:
+            transcript = get_transcript(v)
+            videos[i]["transcript"] = transcript
+        except:
+            pass
+    print(json.dumps(videos))
