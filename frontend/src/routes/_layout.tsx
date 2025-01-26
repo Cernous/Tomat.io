@@ -1,58 +1,76 @@
-import { Box, Divider, Flex, ColorMode, Center, Link, Image} from '@chakra-ui/react'
+import {
+  Flex,
+  Center,
+  Link,
+  Image,
+  Box,
+} from '@chakra-ui/react'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import '@fontsource/raleway/400.css'
 import '@fontsource/open-sans/700.css'
 import tomatioLogo from '../assets/tomat-01.svg'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-} from '@chakra-ui/react'
-
 import React from 'react'
 
+// Define the route
 export const Route = createFileRoute('/_layout')({
   component: RouteComponent,
 })
 
+// Main Route Component
 function RouteComponent() {
   return (
-    <>
-    <Breadcrumb display="flex" justifyContent="center" alignItems="center" h="17vh">
-      <BreadcrumbItem >
-        <BreadcrumbLink href="/about"
-         _hover={{
-          color: "orange", // Increase font size on hover
-          textDecoration: "none", // Optionally remove underline
-        }}>About Us</BreadcrumbLink>
-      </BreadcrumbItem>
-    </Breadcrumb>
-<Flex
-        display="flow"
-        flexDir="column"
-        justifyContent="space-between"
-        width = "50%"
-        transform = "translate(50%, -70%)" 
+    <Flex
+      direction="column"
+      minHeight="100vh" // Full viewport height
+      bg="antiquewhite"
+    >
+      {/* Navbar */}
+      <Flex
+        as="nav"
+        align="center"
+        justify="center"
+        bg="antiquewhite"
+        width="100%"
+        height="10vh" // Navbar height
+        boxShadow="md"
         p={4}
-      > 
-      <Flex transform = "translateY(30%)" height = "20vh">
-        
-      <Center>
-          <Link
-            href="/"
-            _hover={{
-              color: "red",
-              textDecoration: "none", // Optionally remove underline
-            }}
-            transition="all 0.3s ease-in-out"
-          > 
-            <Image top = "20vh"boxSize = "200px" src = {tomatioLogo} alt = "tomat-logo"></Image>
-            
-          </Link>
-        </Center></Flex>
+      >
+        <Link
+          href="/about"
+          fontWeight="bold"
+          fontSize="lg"
+          _hover={{
+            color: 'orange',
+            textDecoration: 'none',
+          }}
+        >
+          About Us
+        </Link>
       </Flex>
-    <Outlet />
-    </>
+
+      {/* Logo Section */}
+      <Flex
+        justify="center"
+        align="center"
+        height="40vh" // Allocate space for the logo
+        bg="antiquewhite" // Optional: background color for separation
+      >
+        <Link
+          href="/"
+        >
+          <Image
+            boxSize="150px"
+            src={tomatioLogo}
+            alt="tomatio-logo"
+          />
+        </Link>
+      </Flex>
+
+
+      {/* Outlet for Nested Routes */}
+      <Outlet />
+    </Flex>
   )
 }
+
+

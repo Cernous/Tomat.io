@@ -114,7 +114,7 @@ function Index() {
          p={4}
          left="50%" 
          transform="translateX(-50%)" 
-         borderRadius={30}
+         borderRadius={50}
          borderColor={'red'}
          borderWidth={"2px"}
          borderStyle={'inset'}
@@ -135,14 +135,14 @@ function Index() {
          bg="white" p={4}
          left="50%" 
          transform="translateX(-50%)" 
-         boxShadow="2xl" borderRadius={30}
+         boxShadow="2xl" 
+         borderRadius={50}
          transition="all 0.3s ease-in-out"
          _focusWithin={{
            transform: "translateX(-50%) translateY(-20vh)",
            width: "75%",
            boxShadow: "lg",
          }}>
-  
 
         <Input
           type ="text"
@@ -160,5 +160,6 @@ function Index() {
         />
     </Box>
     </div>
+    
   )
 }
