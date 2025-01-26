@@ -43,7 +43,7 @@ def get_dish(request: UserRequest):
         WeighT = item.weight
         priceOfItem = checkPri(NamE, client)
         wei =float(WeighT) 
-        single_Price = (priceOfItem/453)*wei*100
+        single_Price = (priceOfItem)*wei*50
         priCe += single_Price
 
     video_links = search_youtube_videos(dish_name, 3)

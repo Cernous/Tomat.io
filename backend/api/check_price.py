@@ -17,7 +17,7 @@ def checkPri(materiNam:str, client: OpenAI):
     model="gpt-4o-mini-2024-07-18",
     store=True,
     messages=[
-      {"role": "user", "content": "content only contains an float!!!do not give out any string!find a price of" + materiNam + "which show the price of the item per 1 pound in dollar"}
+      {"role": "user", "content": "content only contains an float!!!do not give out any string!find a price of" + materiNam + "which show the price of the item per pound in dollar"}
     ]
   )
   return float(completion.choices[0].message.content)
