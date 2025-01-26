@@ -5,16 +5,15 @@ from api.youtubeapi import search_youtube_videos
 from api.check_price import *
 router = APIRouter()
 
-recipe: Recipe = Recipe(name="", ingredient=[], links=[], price="")
-hour: int = 0
-dishTime: str = ""
-inputMessage: str = 0
-userChoice: str = ""
-content: list[str] = []
-
-
 @router.get("/query")
 def get_dish(request: UserRequest):
+    recipe: Recipe = Recipe(name="", ingredient=[], links=[])
+    hour: int = 0
+    dishTime: str = ""
+    inputMessage: str = 0
+    userChoice: str = ""
+    content: list[str] = []
+
     hour = int(request.time[0:1])
     if 8 <= hour <= 10:
         dishTime = "for breakfest"
