@@ -1,66 +1,90 @@
-import { Box, Input, Link, Center, Flex, InputGroup, InputRightElement, Button} from '@chakra-ui/react'
+import { Box, Input, Link, Center, Flex, InputGroup, InputRightElement, Button, ChakraProvider, keyframes} from '@chakra-ui/react'
+import React, { useState } from "react";
 import { createFileRoute } from '@tanstack/react-router'
-import React from 'react'
+
 
 
 export const Route = createFileRoute('/_layout/')({
   component: Index,
 })
 
+const fadeUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20vh); /* Start slightly below the initial position */
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 10vh); /* Final position */
+  }
+`;
+
 function Index() {
   return (
+    
     <div>
-      <Flex
-        display="flex"
-        flexDir="column"
-        justifyContent="space-between"
-        p={4}
-        bg="teal.500"
-      > 
-      <Box>
-      <Center>
-          <Link
-            href="https://en.wikipedia.org/wiki/Tomato"
-            color="white"
-            fontSize="2xl"
-            fontWeight="bold"
-          > 
-            Tomat.io
-          </Link>
-        </Center></Box>
-      </Flex>
+      
+
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              position="absolute"
+              left="35%"
+              transform="translate(-50%, 10vh)"
+              width="60%" // Adjust width as needed
+              height="10%" // Adjust height as needed
+              fontWeight={1000}
+              color="green"
+              textAlign="center"
+              fontSize="5rem"
+              animation={`${fadeUp} 1.5s ease-out`} // Apply the animation
+            >
+              Don't Be A Tomato.
+            </Box>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              position="absolute"
+              left="70%"
+              transform="translate(-50%, 10vh)"
+              width="60%" // Adjust width as needed
+              height="80%" // Adjust height as needed
+              fontWeight={1000}
+              color="green"
+              textAlign="center"
+              fontSize="5rem"
+              animation={`${fadeUp} 2s ease-in`} // Apply the animation
+            >
+               Eat A Tomat.io
+            </Box>
 
 
-      <Box 
-      p={4}
-      alignSelf = "center">
-        <Flex>
-        <Input
-          type="text"
-          name="query"
-          display="flex"
-          flexDir="column"
-          placeholder="Enter Questions Here!"
-          size="lg"
-          variant="outline"
+      <Box position="fixed" 
+         bottom="4vh" 
+         width="30%" 
+         bg="white" p={4}
+         left="50%" 
+         transform="translateX(-50%)" 
+         boxShadow="2xl" borderRadius={30}
+         transition="all 0.3s ease-in-out"
+         _focusWithin={{
+           transform: "translateX(-50%) translateY(-20vh)",
+           width: "75%",
+           boxShadow: "lg",
+         }}>
+  
 
-
-        />
-      </Flex>
-      </Box>
-      <Box position="fixed" bottom="0" width="100%" bg="white" p={4} boxShadow="lg">
-      <InputGroup size="md">
         <Input
           placeholder="Enter Your Questions Here"
-          borderColor="gray.300"
-          focusBorderColor=".500"
+          borderColor="green"
+          focusBorderColor="green"
+          _focusWithin={{
+            borderColor: "lime",
+            borderWidth:"2px"
+          }}
         />
-        <InputRightElement>
-          <Button colorScheme="teal" size="sm" width = "50%">
-            Search
-          </Button>
-        </InputRightElement>
-      </InputGroup>
     </Box>
     </div>
   )
