@@ -10,7 +10,7 @@ export type Recipe = {
     name: string
     ingredient: Array<Ingredient>
     links: Array<String>
-    price: number
+    price: string
 }
 
 export type UserRequest = {

@@ -1,8 +1,8 @@
 import { Box, Input, Link, Center, Flex, InputGroup, InputRightElement, Button, ChakraProvider, keyframes} from '@chakra-ui/react'
 import React, { useState } from "react";
 import { createFileRoute } from '@tanstack/react-router'
-
-
+import { useQueryClient, useQuery } from '@tanstack/react-query';
+import { RecipeServices, UserRequest } from '../../client';
 
 export const Route = createFileRoute('/_layout/')({
   component: Index,
@@ -30,8 +30,43 @@ const fadeUp2 = keyframes`
   }
 `;
 
+function readQueryReply(data: UserRequest) {
+	return {
+		queryFn: () => RecipeServices.get_Recipe(data),
+		queryKey: ["recipe"],
+	}
+}
 
 function Index() {
+  const qclient = useQueryClient()
+  const [value, setValue] = useState("");
+  const [queryParams, setQueryParams] = useState({ time: "", query: "", choice: [] }); // Start as null, but will later become an object
+
+  const { data, isLoading, error } = useQuery(
+    ["getRecipe", queryParams],
+    () => RecipeServices.get_Recipe(queryParams),
+    {
+      enabled: !!queryParams, // Only fetch when queryParams is not null
+    }
+  );
+
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      // console.log("Enter key pressed. Current value:", value);
+      const now = new Date();
+      const formattedTime = `${now.getHours()}:${now.getMinutes()}`;
+      // Update `queryParams` with a consistent object format
+      setQueryParams({ time: formattedTime, query: value, choice: []});
+      
+
+    }
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
   return (
     
     <div>
@@ -108,25 +143,21 @@ function Index() {
            width: "75%",
            boxShadow: "lg",
          }}>
-  
-  <div style={{ position: "relative", width: "100%" }}>
-  <Input
-    type="text"
-    name="query"
-    placeholder="Enter Your Questions Here"
-    borderColor="green"
-    focusBorderColor="green"
-    borderRadius={50}
-    _focusWithin={{
-      borderColor: "lime",
-      borderWidth: "2px",
-    }}
-    style={{
-      paddingRight: "60px", // Add padding to ensure text doesn't overlap the button
-    }}
-  />
-  
-</div>
+
+        <Input
+          type ="text"
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          name= "query"
+          placeholder="Enter Your Questions Here"
+          borderColor="green"
+          focusBorderColor="green"
+          _focusWithin={{
+            borderColor: "lime",
+            borderWidth:"2px"
+          }}
+        />
     </Box>
     </div>
     
