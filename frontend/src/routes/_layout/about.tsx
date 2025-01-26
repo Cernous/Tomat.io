@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import React from 'react'
 
 export const Route = createFileRoute('/_layout/about')({
@@ -9,7 +9,7 @@ function About() {
   return (
     <div>
       <div className="p-2">Gorden Quach </div>
-      <a href="https://github.com/forGOATten">My GitHub!</a>
+      <Link to={"https://github.com/forGOATten"}>My GitHub!</Link>
     </div>
   )
 }
