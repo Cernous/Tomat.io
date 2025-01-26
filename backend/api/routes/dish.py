@@ -42,7 +42,7 @@ def get_dish(request: UserRequest):
         NamE = item.name
         WeighT = item.weight
         priceOfItem = checkPri(NamE, client)
-        wei =float(item.weight) 
+        wei =float(WeighT) 
         single_Price = (priceOfItem/453)*wei*100
         priCe += single_Price
 
@@ -50,7 +50,7 @@ def get_dish(request: UserRequest):
     recipe.name = dish_name
     recipe.ingredient = ingred
     recipe.links = video_links
-    recipe.price = str(priCe)
+    recipe.price = str(round(priCe,2))
 
     return(recipe)
 
