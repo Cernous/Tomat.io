@@ -5,7 +5,7 @@ from api.youtubeapi import search_youtube_videos
 from api.check_price import *
 router = APIRouter()
 
-@router.get("/query")
+@router.post("/query", response_model=Recipe)
 def get_dish(request: UserRequest):
     recipe: Recipe = Recipe(name="", ingredient=[], links=[], price="")
     hour: int = 0
@@ -48,7 +48,7 @@ def get_dish(request: UserRequest):
     video_links = search_youtube_videos(dish_name, 3)
     recipe.name = dish_name
     recipe.ingredient = ingred
-    recipe.links = video_links
+    recipe.links = [v['link'] for v in video_links]
     recipe.price = str(round(priCe,2))
 
     return(recipe)

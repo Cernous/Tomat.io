@@ -12,15 +12,15 @@ export class RecipeServices {
     public static get_Recipe(
         data: UserRequest
     ): CancelablePromise<Recipe> {
+        console.log(data.choice)
         return __request(OpenAPI,
             {
-                method: "GET",
+                method: "POST",
                 url: "/api/dish/query",
                 body: data,
                 headers: {
                     Accept: "application/json"
-                },
-                responseType: "json"
+                }
             }
         )
 
