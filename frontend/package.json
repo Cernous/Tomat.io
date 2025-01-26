@@ -5,14 +5,19 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -p tsconfig.build.json && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@chakra-ui/react": "^3.5.1",
-    "@emotion/react": "^11.14.0",
+    "@chakra-ui/icons": "2.1.1",
+    "@chakra-ui/react": "2.8.2",
+    "@emotion/react": "11.11.3",
+    "@fontsource-variable/open-sans": "^5.1.1",
+    "@fontsource/open-sans": "^5.1.1",
+    "@fontsource/raleway": "^5.1.1",
     "@tanstack/react-router": "^1.97.17",
+    "axios": "^1.7.9",
     "next-themes": "^0.4.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
