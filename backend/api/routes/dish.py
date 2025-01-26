@@ -2,15 +2,16 @@ from fastapi import APIRouter
 from models import UserRequest, Ingredient, Recipe
 from api.chatgptapi import *
 from api.youtubeapi import search_youtube_videos
-
+from api.check_price import *
 router = APIRouter()
 
-recipe: Recipe = Recipe(name="", ingredient=[], links=[])
+recipe: Recipe = Recipe(name="", ingredient=[], links=[], price="")
 hour: int = 0
 dishTime: str = ""
 inputMessage: str = 0
 userChoice: str = ""
 content: list[str] = []
+
 
 @router.get("/query")
 def get_dish(request: UserRequest):
@@ -36,10 +37,20 @@ def get_dish(request: UserRequest):
     weight_list = get_material_weight_list(content)
     carbon_list = get_material_carbon_list(content)
     ingred = get_ingredient_list(name_list, weight_list, carbon_list)
+    priCe: float = 0
+    for item in ingred:
+        NamE = item.name
+        WeighT = item.weight
+        priceOfItem = checkPri(NamE, client)
+        wei =float(item.weight) 
+        single_Price = (priceOfItem/453)*wei*100
+        priCe += single_Price
+
     video_links = search_youtube_videos(dish_name, 3)
-    recipe.name = dish_name;
+    recipe.name = dish_name
     recipe.ingredient = ingred
     recipe.links = video_links
+    recipe.price = str(priCe)
 
     return(recipe)
 
