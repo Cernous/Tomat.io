@@ -3,3 +3,5 @@ pydantic_settings
 requests
 python-dotenv
 sqlmodel
+openai
+google-api-python-client
