@@ -1,5 +1,4 @@
 from googleapiclient.discovery import build
-from chatgptapi import nam_Dish
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -27,10 +26,4 @@ def search_youtube_videos(query, max_results=3):
 
     return videos
 
-if __name__ == "__main__":
-    keyword = nam_Dish
-    results = search_youtube_videos(keyword)
-
-    # 创建一个包含标题和链接的字符串列表
-    video_list = [f"{video['title']} ({video['link']})" for video in results]
 

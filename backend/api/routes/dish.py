@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from api.models import *
+from models import UserRequest, Ingredient, Recipe
 from api.chatgptapi import *
 from api.youtubeapi import search_youtube_videos
 
@@ -12,7 +12,7 @@ inputMessage: str = 0
 userChoice: str = ""
 content: list[str] = []
 
-@router.get("/api/dish/query")
+@router.get("/query")
 def get_dish(request: UserRequest):
     hour = int(request.time[0:1])
     if 8 <= hour <= 10:

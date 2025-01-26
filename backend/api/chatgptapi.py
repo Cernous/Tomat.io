@@ -1,8 +1,8 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
-from backend.api.models import UserRequest, Recipe, Ingredient
-from youtubeapi import video_list
+from models import UserRequest, Recipe, Ingredient
+
 load_dotenv()
 __TOKEN = os.getenv("OPENAI_API_KEY")
 
@@ -43,7 +43,7 @@ def get_material_carbon_list(each_line: list[str]):
 
 def get_ingredient_list(name_list: list[str], weight_list: list[str], carbon_list: list[str]):
   length = len(name_list)
-  ingred = Ingredient(name = '', price = 0, weight = 0, carbon = 0)
+  ingred = Ingredient(name = '', price = "0", weight = "0", carbon = "0")
   ingred_list = []
 
   for i in range(length - 1) :
