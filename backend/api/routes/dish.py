@@ -7,7 +7,7 @@ router = APIRouter()
 
 @router.get("/query")
 def get_dish(request: UserRequest):
-    recipe: Recipe = Recipe(name="", ingredient=[], links=[])
+    recipe: Recipe = Recipe(name="", ingredient=[], links=[], price="")
     hour: int = 0
     dishTime: str = ""
     inputMessage: str = 0
