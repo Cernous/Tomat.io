@@ -7,21 +7,17 @@ __TOKEN = os.getenv("YT_PI_KEY")
 
 
 def search_youtube_videos(query, max_results=3):
-    # 构建 API 服务
     youtube = build("youtube", "v3", developerKey=__TOKEN)
 
-    # 调用 API 的搜索方法
     request = youtube.search().list(
         q=query,
         part="id,snippet",
-        type="video",  # 搜索类型为视频
+        type="video",
         maxResults=max_results
     )
 
-    # 执行请求并获取响应
     response = request.execute()
 
-    # 提取视频标题和链接
     videos = []
     for item in response.get("items", []):
         video_id = item["id"]["videoId"]
@@ -31,7 +27,6 @@ def search_youtube_videos(query, max_results=3):
 
     return videos
 
-# 测试
 if __name__ == "__main__":
     keyword = nam_Dish
     results = search_youtube_videos(keyword)

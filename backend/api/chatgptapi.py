@@ -6,7 +6,7 @@ from youtubeapi import video_list
 load_dotenv()
 __TOKEN = os.getenv("OPENAI_API_KEY")
 
-def __sigin(token: str):
+def sign_in():
   return OpenAI(
   api_key=__TOKEN
   )
