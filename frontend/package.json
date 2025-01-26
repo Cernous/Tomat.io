@@ -13,6 +13,7 @@
     "@chakra-ui/icons": "2.1.1",
     "@chakra-ui/react": "2.8.2",
     "@emotion/react": "11.11.3",
+    "@fontsource-variable/open-sans": "^5.1.1",
     "@fontsource/open-sans": "^5.1.1",
     "@fontsource/raleway": "^5.1.1",
     "@tanstack/react-router": "^1.97.17",
