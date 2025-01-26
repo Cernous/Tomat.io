@@ -1,10 +1,23 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { Card, CardHeader, CardBody, CardFooter, SimpleGrid, Heading, Button, Text, Box} from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, CardFooter, SimpleGrid, Heading, Button, Text, Box, keyframes} from '@chakra-ui/react'
 import React from 'react'
 
 export const Route = createFileRoute('/_layout/about')({
   component: About,
 })
+
+const fadeUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 15vh); /* Start slightly below the initial position */
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 8vh); /* Final position */
+  }
+`;
+
+
 
 function About() {
 
@@ -32,7 +45,7 @@ function About() {
     <SimpleGrid 
     spacing={10} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
     <Card>
-      <CardHeader>
+      <CardHeader animation={`${fadeUp} 1.5s ease-out`} >
         <Heading size='md'> Gorden Quach</Heading>
       </CardHeader>
       <CardBody>
@@ -43,7 +56,7 @@ function About() {
       </CardFooter>
     </Card>
     <Card>
-      <CardHeader>
+      <CardHeader >
         <Heading size='md'> Clarence Zhen</Heading>
       </CardHeader>
       <CardBody>
