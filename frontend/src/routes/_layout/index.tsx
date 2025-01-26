@@ -15,7 +15,7 @@ const fadeUp = keyframes`
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, 8vh); /* Final position */
+    transform: translate(-50%, 0vh); /* Final position */
   }
 `;
 
@@ -26,9 +26,10 @@ const fadeUp2 = keyframes`
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, 5vh); /* Final position */
+    transform: translate(-50%, -10vh); /* Final position */
   }
 `;
+
 
 function Index() {
   return (
@@ -40,9 +41,9 @@ function Index() {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              position="absolute"
+              position="fixed"
               left="35%"
-              transform="translate(-50%, 5vh)"
+              transform="translate(-50%, -10vh)"
               width="60%" // Adjust width as needed
               height="0%" // Adjust height as needed
               fontWeight={1000}
@@ -57,11 +58,11 @@ function Index() {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              position="absolute"
+              position="fixed"
               left="70%"
-              transform="translate(-50%, 8vh)"
+              transform="translate(-50%, 0vh)"
               width="60%" // Adjust width as needed
-              height="80%" // Adjust height as needed
+              height="0%" // Adjust height as needed
               fontWeight={1000}
               color="green"
               textAlign="center"
@@ -109,6 +110,9 @@ function Index() {
   
 
         <Input
+          type ="text"
+          //onSubmit={}
+          name= "query"
           placeholder="Enter Your Questions Here"
           borderColor="green"
           focusBorderColor="green"
