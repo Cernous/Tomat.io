@@ -1,4 +1,11 @@
-import { Box, Input, Link, Center, Flex, InputGroup, InputRightElement, Button, ChakraProvider, keyframes} from '@chakra-ui/react'
+import { Box, Input, Link, Center, Flex, InputGroup, InputRightElement, Button, ChakraProvider, keyframes, AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogCloseButton,
+  useDisclosure,} from '@chakra-ui/react'
 import React, { useState } from "react";
 import { createFileRoute } from '@tanstack/react-router'
 import { useQueryClient, useQuery } from '@tanstack/react-query';
@@ -41,7 +48,9 @@ function Index() {
   const qclient = useQueryClient()
   const [value, setValue] = useState("");
   const [queryParams, setQueryParams] = useState({ time: "", query: "", choice: [] }); // Start as null, but will later become an object
-
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef()
+  
   const { data, isLoading, error } = useQuery(
     ["getRecipe", queryParams],
     () => RecipeServices.get_Recipe(queryParams),
@@ -58,7 +67,7 @@ function Index() {
       const formattedTime = `${now.getHours()}:${now.getMinutes()}`;
       // Update `queryParams` with a consistent object format
       setQueryParams({ time: formattedTime, query: value, choice: []});
-      
+      useDisclosure();
 
     }
   };
@@ -158,6 +167,28 @@ function Index() {
             borderWidth:"2px"
           }}
         />
+
+<AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Your Personnalized Recipe
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              request response
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+             This response is AI generateds
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Box>
     </div>
     
