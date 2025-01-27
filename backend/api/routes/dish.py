@@ -1,3 +1,4 @@
+import json
 from fastapi import APIRouter
 from models import UserRequest, Ingredient, Recipe
 from api.chatgptapi import *
@@ -36,7 +37,7 @@ def get_dish(request: UserRequest):
     weight_list = get_material_weight_list(content)
     carbon_list = get_material_carbon_list(content)
     ingred = get_ingredient_list(name_list, weight_list, carbon_list)
-    print(ingred)
+    # print(ingred)
     priCe: float = 0
     for item in ingred:
         NamE = item.name
@@ -51,6 +52,6 @@ def get_dish(request: UserRequest):
     recipe.ingredient = ingred
     recipe.links = [v['link'] for v in video_links]
     recipe.price = str(round(priCe,2))
-    print(recipe)
+    print(recipe.model_dump_json(indent=3))
     return(recipe)
 
