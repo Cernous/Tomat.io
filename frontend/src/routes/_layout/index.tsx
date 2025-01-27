@@ -6,7 +6,7 @@ import { Box, Input, Link, Center, Flex, InputGroup, InputRightElement, Button, 
   AlertDialogOverlay,
   AlertDialogCloseButton,
   useDisclosure,} from '@chakra-ui/react'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createFileRoute } from '@tanstack/react-router'
 import { useQueryClient, useQuery } from '@tanstack/react-query';
 import { RecipeServices, UserRequest } from '../../client';
@@ -59,6 +59,15 @@ function Index() {
     }
   );
 
+  // Reactively log `data` and `isLoading` changes
+  useEffect(() => {
+    if (isLoading) {
+      console.log("Loading data...");
+    } else if (data) {
+      console.log("Data fetched:", data);
+    }
+  }, [isLoading, data]);
+
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -66,9 +75,8 @@ function Index() {
       const now = new Date();
       const formattedTime = `${now.getHours()}:${now.getMinutes()}`;
       // Update `queryParams` with a consistent object format
-      setQueryParams({ time: formattedTime, query: value, choice: []});
-      useDisclosure();
-
+      console.log("Get Got")
+      // setQueryParams({ time: formattedTime, query: value, choice: []});
     }
   };
 
